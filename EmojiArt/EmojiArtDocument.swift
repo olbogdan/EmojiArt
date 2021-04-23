@@ -31,7 +31,7 @@ class EmojiArtDocument: ObservableObject {
             emojiArt.emojis[index].size = Int((CGFloat(emojiArt.emojis[index].size) * scale).rounded(.toNearestOrEven))
         }
     }
-    
+
     func setBackgroundURL(_ url: URL?) {
         emojiArt.backgroundURL = url
     }
