@@ -21,11 +21,17 @@ struct EmojiArtDocumentView: View {
                 }
             }
             .padding(.horizontal)
-            Rectangle().foregroundColor(.white)
-                .edgesIgnoringSafeArea([.horizontal, .bottom])
-                .onDrop(of: ["public.image"], isTargeted: nil) { providers, _ in
-                    drop(providers: providers)
+            Rectangle().foregroundColor(.white).overlay(
+                Group {
+                    if let image = self.document.backgroundImage {
+                        Image(uiImage: image)
+                    }
                 }
+            )
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
+            .onDrop(of: ["public.image"], isTargeted: nil) { providers, _ in
+                drop(providers: providers)
+            }
         }
     }
 

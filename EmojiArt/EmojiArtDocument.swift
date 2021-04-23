@@ -13,6 +13,9 @@ class EmojiArtDocument: ObservableObject {
     @Published
     private var emojiArt = EmojiArt()
 
+    @Published
+    private(set) var backgroundImage: UIImage?
+
     // MARRK: - Intents(s)
 
     func addEmoji(_ emoji: String, at location: CGPoint, size: CGFloat) {
@@ -34,5 +37,19 @@ class EmojiArtDocument: ObservableObject {
 
     func setBackgroundURL(_ url: URL?) {
         emojiArt.backgroundURL = url?.imageURL
+        fetchBackgroundImageData()
+    }
+
+    func fetchBackgroundImageData() {
+        backgroundImage = nil
+        if let url = emojiArt.backgroundURL {
+            DispatchQueue.global(qos: .userInteractive).async {
+                if let imageData = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        self.backgroundImage = UIImage(data: imageData)
+                    }
+                }
+            }
+        }
     }
 }
