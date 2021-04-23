@@ -46,7 +46,9 @@ class EmojiArtDocument: ObservableObject {
             DispatchQueue.global(qos: .userInteractive).async {
                 if let imageData = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {
-                        self.backgroundImage = UIImage(data: imageData)
+                        if url == self.emojiArt.backgroundURL {
+                            self.backgroundImage = UIImage(data: imageData)
+                        }
                     }
                 }
             }
