@@ -16,7 +16,9 @@ struct EmojiArtDocumentView: View {
                 HStack {
                     let data = EmojiArtDocument.palette.map { String($0) }
                     ForEach(data, id: \.self) { emoji in
-                        Text(emoji).font(Font.system(size: defaultEmojiSize))
+                        Text(emoji)
+                            .onDrag { NSItemProvider(object: emoji as NSString) }
+                            .font(Font.system(size: defaultEmojiSize))
                     }
                 }
             }
