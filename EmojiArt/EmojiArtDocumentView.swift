@@ -23,22 +23,40 @@ struct EmojiArtDocumentView: View {
                 }
             }
             .padding(.horizontal)
+
             GeometryReader { geometry in
-                Color.white.overlay(
-                    Group {
-                        if let image = self.document.backgroundImage {
-                            Image(uiImage: image)
+                ZStack {
+                    Color.white.overlay(
+                        Group {
+                            if let image = self.document.backgroundImage {
+                                Image(uiImage: image)
+                            }
                         }
+                    )
+                
+                    .edgesIgnoringSafeArea([.horizontal, .bottom])
+                    .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
+                        var location = geometry.convert(location, from: .global)
+                        location = CGPoint(x: location.x - geometry.size.width/2, y: location.y - geometry.size.height/2)
+                        return drop(providers: providers, at: location)
                     }
-                )
-                .edgesIgnoringSafeArea([.horizontal, .bottom])
-                .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
-                    var location = geometry.convert(location, from: .global)
-                    location = CGPoint(x: location.x - geometry.size.width/2, y: location.y - geometry.size.height/2)
-                    return drop(providers: providers, at: location)
+
+                    ForEach(document.emojis) { emoji in
+                        Text(emoji.text)
+                            .font(font(for: emoji))
+                            .position(position(for: emoji, in: geometry.size))
+                    }
                 }
             }
         }
+    }
+
+    private func font(for emoji: EmojiArt.Emoji) -> Font {
+        Font.system(size: emoji.fontSize)
+    }
+
+    private func position(for emoji: EmojiArt.Emoji, in size: CGSize) -> CGPoint {
+        return CGPoint(x: emoji.location.x + size.width/2, y: emoji.location.y + size.height/2)
     }
 
     private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
