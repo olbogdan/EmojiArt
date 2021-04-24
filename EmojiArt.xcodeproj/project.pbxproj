@@ -14,6 +14,7 @@
 		68E2C8692632288C0000E2EF /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E2C8682632288C0000E2EF /* EmojiArtDocument.swift */; };
 		68E9CACE263231BA00F32778 /* EmojiArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CACD263231BA00F32778 /* EmojiArt.swift */; };
 		68E9CAD1263239CE00F32778 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CAD0263239CE00F32778 /* Extensions.swift */; };
+		68F280572634D4B00066A332 /* OptionalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F280562634D4B00066A332 /* OptionalImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		68E2C8682632288C0000E2EF /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
 		68E9CACD263231BA00F32778 /* EmojiArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArt.swift; sourceTree = "<group>"; };
 		68E9CAD0263239CE00F32778 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		68F280562634D4B00066A332 /* OptionalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				68E2C861263228130000E2EF /* Info.plist */,
 				68E2C85E263228130000E2EF /* Preview Content */,
 				68E9CAD0263239CE00F32778 /* Extensions.swift */,
+				68F280562634D4B00066A332 /* OptionalImage.swift */,
 			);
 			path = EmojiArt;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				68E9CACE263231BA00F32778 /* EmojiArt.swift in Sources */,
 				68E9CAD1263239CE00F32778 /* Extensions.swift in Sources */,
 				68E2C85B263228100000E2EF /* EmojiArtDocumentView.swift in Sources */,
+				68F280572634D4B00066A332 /* OptionalImage.swift in Sources */,
 				68E2C8692632288C0000E2EF /* EmojiArtDocument.swift in Sources */,
 				68E2C859263228100000E2EF /* EmojiArtApp.swift in Sources */,
 			);

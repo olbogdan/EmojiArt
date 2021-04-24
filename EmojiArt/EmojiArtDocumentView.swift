@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
-
+    
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
@@ -27,25 +27,20 @@ struct EmojiArtDocumentView: View {
             GeometryReader { geometry in
                 ZStack {
                     Color.white.overlay(
-                        Group {
-                            if let image = self.document.backgroundImage {
-                                Image(uiImage: image)
-                            }
-                        }
+                        OptionalImage(uiImage: self.document.backgroundImage)
                     )
-                
-                    .edgesIgnoringSafeArea([.horizontal, .bottom])
-                    .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
-                        var location = geometry.convert(location, from: .global)
-                        location = CGPoint(x: location.x - geometry.size.width/2, y: location.y - geometry.size.height/2)
-                        return drop(providers: providers, at: location)
-                    }
-
                     ForEach(document.emojis) { emoji in
                         Text(emoji.text)
                             .font(font(for: emoji))
                             .position(position(for: emoji, in: geometry.size))
                     }
+                }
+                .clipped()
+                .edgesIgnoringSafeArea([.horizontal, .bottom])
+                .onDrop(of: ["public.image", "public.text"], isTargeted: nil) { providers, location in
+                    var location = geometry.convert(location, from: .global)
+                    location = CGPoint(x: location.x - geometry.size.width/2, y: location.y - geometry.size.height/2)
+                    return drop(providers: providers, at: location)
                 }
             }
         }
@@ -75,3 +70,5 @@ struct EmojiArtDocumentView: View {
 
     private let defaultEmojiSize: CGFloat = 40
 }
+
+
