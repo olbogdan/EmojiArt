@@ -41,10 +41,12 @@ struct EmojiArtDocumentView: View {
                             .scaleEffect(zoomScale)
                     )
                     .gesture(self.doubleTapToZoom(in: geometry.size))
-                    ForEach(document.emojis) { emoji in
-                        Text(emoji.text)
-                            .font(animatableWithSize: emoji.fontSize * zoomScale)
-                            .position(position(for: emoji, in: geometry.size))
+                    if !isLoading {
+                        ForEach(document.emojis) { emoji in
+                            Text(emoji.text)
+                                .font(animatableWithSize: emoji.fontSize * zoomScale)
+                                .position(position(for: emoji, in: geometry.size))
+                        }
                     }
                 }
                 .clipped()
@@ -58,6 +60,10 @@ struct EmojiArtDocumentView: View {
                 }
             }
         }
+    }
+
+    var isLoading: Bool {
+        document.backgroundURL != nil && document.backgroundImage == nil
     }
 
     private func zoomGesture() -> some Gesture {
@@ -88,7 +94,7 @@ struct EmojiArtDocumentView: View {
     private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
         var found = providers.loadFirstObject(ofType: URL.self) { url in
             print("dropped  \(url)")
-            document.setBackgroundURL(url)
+            document.backgroundURL = url
         }
         if !found {
             found = providers.loadObjects(ofType: String.self) { string in
