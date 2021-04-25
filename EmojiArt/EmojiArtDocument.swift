@@ -5,8 +5,8 @@
 //  Created by bogdanov on 22.04.21.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 class EmojiArtDocument: ObservableObject {
     static let palette: String = "❤️🎎✈️🏡🐥🏄🤡"
@@ -22,7 +22,7 @@ class EmojiArtDocument: ObservableObject {
 
     @Published
     private var emojiArt: EmojiArt
-    
+
     private var autosaveCancellable: AnyCancellable?
 
     init() {
@@ -65,18 +65,18 @@ class EmojiArtDocument: ObservableObject {
         }
     }
 
-    func fetchBackgroundImageData() {
+    private var fetchImageCancellable: AnyCancellable?
+
+    private func fetchBackgroundImageData() {
         backgroundImage = nil
         if let url = emojiArt.backgroundURL {
-            DispatchQueue.global(qos: .userInteractive).async {
-                if let imageData = try? Data(contentsOf: url) {
-                    DispatchQueue.main.async {
-                        if url == self.emojiArt.backgroundURL {
-                            self.backgroundImage = UIImage(data: imageData)
-                        }
-                    }
-                }
-            }
+            fetchImageCancellable?.cancel()
+
+            fetchImageCancellable = URLSession.shared.dataTaskPublisher(for: url)
+                .map { data, _ in UIImage(data: data) }
+                .receive(on: DispatchQueue.main)
+                .replaceError(with: nil)
+                .assign(to: \.backgroundImage, on: self)
         }
     }
 }
