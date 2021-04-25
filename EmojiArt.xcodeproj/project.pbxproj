@@ -16,6 +16,7 @@
 		68E9CAD1263239CE00F32778 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CAD0263239CE00F32778 /* Extensions.swift */; };
 		68F280572634D4B00066A332 /* OptionalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F280562634D4B00066A332 /* OptionalImage.swift */; };
 		68F2805A2634E17F0066A332 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */; };
+		68F2805D2635F8150066A332 /* Spinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2805C2635F8150066A332 /* Spinning.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		68E9CAD0263239CE00F32778 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		68F280562634D4B00066A332 /* OptionalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalImage.swift; sourceTree = "<group>"; };
 		68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
+		68F2805C2635F8150066A332 /* Spinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinning.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				68E2C85E263228130000E2EF /* Preview Content */,
 				68E9CAD0263239CE00F32778 /* Extensions.swift */,
 				68F280562634D4B00066A332 /* OptionalImage.swift */,
+				68F2805C2635F8150066A332 /* Spinning.swift */,
 			);
 			path = EmojiArt;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				68F280572634D4B00066A332 /* OptionalImage.swift in Sources */,
 				68E2C8692632288C0000E2EF /* EmojiArtDocument.swift in Sources */,
 				68E2C859263228100000E2EF /* EmojiArtApp.swift in Sources */,
+				68F2805D2635F8150066A332 /* Spinning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

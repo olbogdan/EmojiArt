@@ -33,7 +33,6 @@ struct EmojiArtDocumentView: View {
                 }
             }
             .padding(.horizontal)
-
             GeometryReader { geometry in
                 ZStack {
                     Color.white.overlay(
@@ -41,7 +40,9 @@ struct EmojiArtDocumentView: View {
                             .scaleEffect(zoomScale)
                     )
                     .gesture(self.doubleTapToZoom(in: geometry.size))
-                    if !isLoading {
+                    if isLoading {
+                        Image(systemName: "hourglass").imageScale(.large).spinning()
+                    } else {
                         ForEach(document.emojis) { emoji in
                             Text(emoji.text)
                                 .font(animatableWithSize: emoji.fontSize * zoomScale)
