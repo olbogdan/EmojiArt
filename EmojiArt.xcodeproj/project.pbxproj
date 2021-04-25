@@ -15,6 +15,7 @@
 		68E9CACE263231BA00F32778 /* EmojiArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CACD263231BA00F32778 /* EmojiArt.swift */; };
 		68E9CAD1263239CE00F32778 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E9CAD0263239CE00F32778 /* Extensions.swift */; };
 		68F280572634D4B00066A332 /* OptionalImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F280562634D4B00066A332 /* OptionalImage.swift */; };
+		68F2805A2634E17F0066A332 /* AnimatableSystemFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		68E9CACD263231BA00F32778 /* EmojiArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArt.swift; sourceTree = "<group>"; };
 		68E9CAD0263239CE00F32778 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		68F280562634D4B00066A332 /* OptionalImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalImage.swift; sourceTree = "<group>"; };
+		68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableSystemFontModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		68E2C857263228100000E2EF /* EmojiArt */ = {
 			isa = PBXGroup;
 			children = (
+				68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */,
 				68E2C858263228100000E2EF /* EmojiArtApp.swift */,
 				68E2C85A263228100000E2EF /* EmojiArtDocumentView.swift */,
 				68E2C8682632288C0000E2EF /* EmojiArtDocument.swift */,
@@ -150,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F2805A2634E17F0066A332 /* AnimatableSystemFontModifier.swift in Sources */,
 				68E9CACE263231BA00F32778 /* EmojiArt.swift in Sources */,
 				68E9CAD1263239CE00F32778 /* Extensions.swift in Sources */,
 				68E2C85B263228100000E2EF /* EmojiArtDocumentView.swift in Sources */,

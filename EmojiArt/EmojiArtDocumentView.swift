@@ -37,7 +37,7 @@ struct EmojiArtDocumentView: View {
                     .gesture(self.doubleTapToZoom(in: geometry.size))
                     ForEach(document.emojis) { emoji in
                         Text(emoji.text)
-                            .font(font(for: emoji))
+                            .font(animatableWithSize: emoji.fontSize * zoomScale)
                             .position(position(for: emoji, in: geometry.size))
                     }
                 }
@@ -60,10 +60,6 @@ struct EmojiArtDocumentView: View {
                     zoomToFit(document.backgroundImage, in: size)
                 }
             }
-    }
-
-    private func font(for emoji: EmojiArt.Emoji) -> Font {
-        Font.system(size: emoji.fontSize * zoomScale)
     }
 
     private func position(for emoji: EmojiArt.Emoji, in size: CGSize) -> CGPoint {
