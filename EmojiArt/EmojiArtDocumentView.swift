@@ -21,6 +21,11 @@ struct EmojiArtDocumentView: View {
     }
 
     private let defaultEmojiSize: CGFloat = 40
+    
+    init(document: EmojiArtDocument) {
+        self.document = document
+        _chosenPalette = State(wrappedValue: document.defaultPalette)
+    }
 
     var body: some View {
         VStack {
@@ -35,9 +40,6 @@ struct EmojiArtDocumentView: View {
                                 .font(Font.system(size: defaultEmojiSize))
                         }
                     }
-                }
-                .onAppear {
-                    chosenPalette = document.defaultPalette
                 }
             }
             GeometryReader { geometry in
