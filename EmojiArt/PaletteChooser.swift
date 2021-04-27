@@ -34,7 +34,7 @@ struct PaletteChooser: View {
                 .popover(isPresented: $showPaletteEditor) {
                     PaletteEditor(chosenPalette: $chosenPalette)
                         .environmentObject(document)
-                        .frame(minWidth: 200, minHeight: 200)
+                        .frame(minWidth: 200, minHeight: 400)
                 }
         }
         .fixedSize(horizontal: true, vertical: false)
@@ -51,23 +51,33 @@ struct PaletteEditor: View {
     @State private var emojisToAdd: String = ""
 
     var body: some View {
-        VStack {
-            Text("Palette Editor")
-                .font(.headline)
-                .padding()
-            Divider()
-            TextField("Palette name", text: $paletteName) { began in
-                if !began {
-                    document.renamePalette(chosenPalette, to: paletteName)
+        VStack(spacing: 0) {
+            Text("Palette Editor").font(.headline)
+            Form {
+                Section {
+                    TextField("Palette name", text: $paletteName) { began in
+                        if !began {
+                            document.renamePalette(chosenPalette, to: paletteName)
+                        }
+                    }
+                    TextField("Add Emoji", text: $emojisToAdd) { began in
+                        if !began {
+                            chosenPalette = document.addEmoji(emojisToAdd, toPalette: chosenPalette)
+                            emojisToAdd = ""
+                        }
+                    }
+                }
+                Section(header: Text("Remove Emoji")) {
+                    VStack {
+                        ForEach(chosenPalette.map { String($0) }, id: \.self) { emoji in
+                            Text(emoji)
+                                .onTapGesture {
+                                    chosenPalette = document.removeEmoji(emoji, fromPalette: chosenPalette)
+                                }
+                        }
+                    }
                 }
             }
-            TextField("Add Emoji", text: $emojisToAdd) { began in
-                if !began {
-                    chosenPalette = document.addEmoji(emojisToAdd, toPalette: chosenPalette)
-                    emojisToAdd = ""
-                }
-            }
-            Spacer()
         }
         .onAppear {
             paletteName = document.paletteNames[chosenPalette] ?? ""
