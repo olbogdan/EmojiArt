@@ -31,8 +31,8 @@ struct PaletteChooser: View {
                 .onTapGesture {
                     showPaletteEditor = true
                 }
-                .popover(isPresented: $showPaletteEditor) {
-                    PaletteEditor(chosenPalette: $chosenPalette)
+                .sheet(isPresented: $showPaletteEditor) {
+                    PaletteEditor(chosenPalette: $chosenPalette, isShowing: $showPaletteEditor)
                         .environmentObject(document)
                         .frame(minWidth: 200, minHeight: 400)
                 }
@@ -46,6 +46,8 @@ struct PaletteEditor: View {
 
     @Binding var chosenPalette: String
 
+    @Binding var isShowing: Bool
+
     @State private var paletteName: String = ""
 
     @State private var emojisToAdd: String = ""
@@ -53,7 +55,7 @@ struct PaletteEditor: View {
     private let columns = [
         GridItem(.adaptive(minimum: 40))
     ]
-    
+
     private let fontSize: CGFloat = 40
 
     var body: some View {
