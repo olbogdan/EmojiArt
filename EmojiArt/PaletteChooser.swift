@@ -50,6 +50,12 @@ struct PaletteEditor: View {
 
     @State private var emojisToAdd: String = ""
 
+    private let columns = [
+        GridItem(.adaptive(minimum: 40))
+    ]
+    
+    private let fontSize: CGFloat = 40
+
     var body: some View {
         VStack(spacing: 0) {
             Text("Palette Editor").font(.headline)
@@ -68,12 +74,14 @@ struct PaletteEditor: View {
                     }
                 }
                 Section(header: Text("Remove Emoji")) {
-                    VStack {
-                        ForEach(chosenPalette.map { String($0) }, id: \.self) { emoji in
-                            Text(emoji)
-                                .onTapGesture {
-                                    chosenPalette = document.removeEmoji(emoji, fromPalette: chosenPalette)
-                                }
+                    ScrollView {
+                        LazyVGrid(columns: columns) {
+                            ForEach(chosenPalette.map { String($0) }, id: \.self) { emoji in
+                                Text(emoji).font(Font.system(size: fontSize))
+                                    .onTapGesture {
+                                        chosenPalette = document.removeEmoji(emoji, fromPalette: chosenPalette)
+                                    }
+                            }
                         }
                     }
                 }
