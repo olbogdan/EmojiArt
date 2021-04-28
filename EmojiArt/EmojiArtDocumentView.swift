@@ -11,7 +11,7 @@ struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
 
     @State private var steadyStateZoomScale: CGFloat = 1.0
-    
+
     @State private var chosenPalette: String = ""
 
     @GestureState private var gestureZoomScale: CGFloat = 1.0
@@ -21,7 +21,7 @@ struct EmojiArtDocumentView: View {
     }
 
     private let defaultEmojiSize: CGFloat = 40
-    
+
     init(document: EmojiArtDocument) {
         self.document = document
         _chosenPalette = State(wrappedValue: document.defaultPalette)
@@ -72,6 +72,13 @@ struct EmojiArtDocumentView: View {
                     return drop(providers: providers, at: location)
                 }
             }
+            .navigationBarItems(trailing: Button(action: {
+                if let url = UIPasteboard.general.url {
+                    document.backgroundURL = url
+                }
+            }, label: {
+                Image(systemName: "doc.on.clipboard").imageScale(.large)
+            }))
         }
     }
 
