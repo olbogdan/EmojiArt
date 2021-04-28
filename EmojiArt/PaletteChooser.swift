@@ -60,7 +60,16 @@ struct PaletteEditor: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("Palette Editor").font(.headline)
+            ZStack {
+                Text("Palette Editor").font(.headline)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isShowing = false
+                    }, label: { Text("Done") })
+                }
+            }.padding()
+            Divider()
             Form {
                 Section {
                     TextField("Palette name", text: $paletteName) { began in
