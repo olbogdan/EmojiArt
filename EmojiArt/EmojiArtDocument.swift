@@ -19,6 +19,8 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
 
     @Published
     private(set) var backgroundImage: UIImage?
+    
+    @Published var steadyStateZoomScale: CGFloat = 1.0
 
     @Published
     private var emojiArt: EmojiArt
