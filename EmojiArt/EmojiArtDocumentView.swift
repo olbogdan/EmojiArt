@@ -14,6 +14,8 @@ struct EmojiArtDocumentView: View {
 
     @State private var explainBackgroundPaste = false
 
+    @State private var confirmBackgroundPaste = false
+
     @GestureState private var gestureZoomScale: CGFloat = 1.0
 
     private var zoomScale: CGFloat {
@@ -73,8 +75,8 @@ struct EmojiArtDocumentView: View {
                 }
             }
             .navigationBarItems(trailing: Button(action: {
-                if let url = UIPasteboard.general.url {
-                    document.backgroundURL = url
+                if UIPasteboard.general.url != nil {
+                    confirmBackgroundPaste = true
                 } else {
                     explainBackgroundPaste = true
                 }
@@ -84,6 +86,11 @@ struct EmojiArtDocumentView: View {
                         Alert(title: Text("Paste Background"), message: Text("Copy the URL of an image to the clip board and touch this button to make it the background of your document."), dismissButton: .default(Text("OK")))
                     })
             }))
+            .alert(isPresented: $confirmBackgroundPaste, content: {
+                Alert(title: Text("Paste Background"), message: Text("Replace your background with \(UIPasteboard.general.url?.absoluteString ?? "nothing")?"), primaryButton: .default(Text("OK")) {
+                    document.backgroundURL = UIPasteboard.general.url
+                }, secondaryButton: .cancel())
+            })
         }
     }
 
