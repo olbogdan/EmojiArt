@@ -11,7 +11,9 @@ struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
 
     @State private var chosenPalette: String = ""
-    
+
+    @State private var explainBackgroundPaste = false
+
     @GestureState private var gestureZoomScale: CGFloat = 1.0
 
     private var zoomScale: CGFloat {
@@ -73,9 +75,14 @@ struct EmojiArtDocumentView: View {
             .navigationBarItems(trailing: Button(action: {
                 if let url = UIPasteboard.general.url {
                     document.backgroundURL = url
+                } else {
+                    explainBackgroundPaste = true
                 }
             }, label: {
                 Image(systemName: "doc.on.clipboard").imageScale(.large)
+                    .alert(isPresented: $explainBackgroundPaste, content: {
+                        Alert(title: Text("Paste Background"), message: Text("Copy the URL of an image to the clip board and touch this button to make it the background of your document."), dismissButton: .default(Text("OK")))
+                    })
             }))
         }
     }
