@@ -16,7 +16,7 @@ struct EmojiArtDocumentChooser: View {
                 ForEach(store.documents) { document in
                     NavigationLink(destination: EmojiArtDocumentView(document: document)
                         .navigationBarTitle(store.name(for: document))) {
-                            Text(store.name(for: document))
+                        Text(store.name(for: document))
                     }
                 }
                 .onDelete { indexSet in
@@ -27,8 +27,12 @@ struct EmojiArtDocumentChooser: View {
             }
             .navigationBarTitle(store.name)
             .navigationBarItems(
-                leading: Button(action: { store.addDocument() },
-                                label: { Image(systemName: "plus").imageScale(.large) }))
+                leading: Button(action: {
+                    store.addDocument()
+                }, label: { Image(systemName: "plus").imageScale(.large)
+                }),
+                trailing: EditButton()
+            )
         }
     }
 }
