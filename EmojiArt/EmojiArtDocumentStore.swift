@@ -22,7 +22,15 @@ class EmojiArtDocumentStore: ObservableObject {
     }
     
     func addDocument(named name: String = "Untitled") {
-        documentNames[EmojiArtDocument()] = name
+        let uniqueName = name.uniqued(withRespectTo: documentNames.values)
+        let document: EmojiArtDocument
+        if let url = directory?.appendingPathComponent(uniqueName) {
+            document = EmojiArtDocument(url: url)
+        } else {
+            document = EmojiArtDocument()
+        }
+        
+        documentNames[document] = uniqueName
     }
 
     func removeDocument(_ document: EmojiArtDocument) {
