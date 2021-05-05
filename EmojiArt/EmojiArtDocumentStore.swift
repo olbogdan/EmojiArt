@@ -34,6 +34,9 @@ class EmojiArtDocumentStore: ObservableObject {
     }
 
     func removeDocument(_ document: EmojiArtDocument) {
+        if let name = documentNames[document], let url = directory?.appendingPathComponent(name) {
+            try? FileManager.default.removeItem(at: url)
+        }
         documentNames[document] = nil
     }
     
