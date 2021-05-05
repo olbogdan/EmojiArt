@@ -19,7 +19,7 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
 
     @Published
     private(set) var backgroundImage: UIImage?
-    
+
     @Published var steadyStateZoomScale: CGFloat = 1.0
 
     @Published
@@ -29,7 +29,7 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
 
     init(id: UUID? = nil) {
         self.id = id ?? UUID()
-        let defaultKey = "EmojiArtDocument.\(id?.uuidString)"
+        let defaultKey = "EmojiArtDocument.\(self.id.uuidString)"
         emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: defaultKey)) ?? EmojiArt()
         autosaveCancellable = $emojiArt.sink { emojiArt in
             print("\(emojiArt.json?.utf8 ?? "nil")")
@@ -37,6 +37,29 @@ class EmojiArtDocument: ObservableObject, Hashable, Identifiable {
         }
 
         fetchBackgroundImageData()
+    }
+
+    var url: URL? {
+        didSet {
+            save(emojiArt)
+        }
+    }
+
+    init(url: URL) {
+        id = UUID()
+        self.url = url
+        emojiArt = EmojiArt(json: try? Data(contentsOf: url)) ?? EmojiArt()
+        fetchBackgroundImageData()
+        autosaveCancellable = $emojiArt.sink { emojiArt in
+            print("\(emojiArt.json?.utf8 ?? "nil")")
+            self.save(emojiArt)
+        }
+    }
+
+    private func save(_ emojiArt: EmojiArt) {
+        if let saveUrl = url {
+            try? emojiArt.json?.write(to: saveUrl)
+        }
     }
 
     // MARRK: - Intents(s)

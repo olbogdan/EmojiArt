@@ -1,16 +1,9 @@
-//
-//  EmojiArtDocumentStore.swift
-//  EmojiArt
-//
-//  Created by CS193p Instructor on 5/6/20.
-//  Copyright © 2020 Stanford University. All rights reserved.
-//
-
-import SwiftUI
 import Combine
+import SwiftUI
 
-class EmojiArtDocumentStore: ObservableObject
-{
+class EmojiArtDocumentStore: ObservableObject {
+    @Published private var documentNames = [EmojiArtDocument: String]()
+    
     let name: String
     
     func name(for document: EmojiArtDocument) -> String {
@@ -36,8 +29,6 @@ class EmojiArtDocumentStore: ObservableObject
         documentNames[document] = nil
     }
     
-    @Published private var documentNames = [EmojiArtDocument:String]()
-    
     private var autosave: AnyCancellable?
     
     init(named name: String = "Emoji Art") {
@@ -48,11 +39,27 @@ class EmojiArtDocumentStore: ObservableObject
             UserDefaults.standard.set(names.asPropertyList, forKey: defaultsKey)
         }
     }
+    
+    private var directory: URL?
+    
+    init(directory: URL) {
+        name = directory.lastPathComponent
+        self.directory = directory
+        do {
+            let documents = try FileManager.default.contentsOfDirectory(atPath: directory.path)
+            for document in documents {
+                let emojiArtDocument = EmojiArtDocument(url: directory.appendingPathComponent(document))
+                documentNames[emojiArtDocument] = document
+            }
+        } catch {
+            print("EmojiArtDocumentStore: couldn't create store from directory \(directory): \(error.localizedDescription)")
+        }
+    }
 }
 
 extension Dictionary where Key == EmojiArtDocument, Value == String {
-    var asPropertyList: [String:String] {
-        var uuidToName = [String:String]()
+    var asPropertyList: [String: String] {
+        var uuidToName = [String: String]()
         for (key, value) in self {
             uuidToName[key.id.uuidString] = value
         }
@@ -61,7 +68,7 @@ extension Dictionary where Key == EmojiArtDocument, Value == String {
     
     init(fromPropertyList plist: Any?) {
         self.init()
-        let uuidToName = plist as? [String:String] ?? [:]
+        let uuidToName = plist as? [String: String] ?? [:]
         for uuid in uuidToName.keys {
             self[EmojiArtDocument(id: UUID(uuidString: uuid))] = uuidToName[uuid]
         }

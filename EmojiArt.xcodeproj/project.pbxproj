@@ -74,14 +74,14 @@
 		68E2C857263228100000E2EF /* EmojiArt */ = {
 			isa = PBXGroup;
 			children = (
+				68BDF709263A0C1F00B9D630 /* EmojiArtDocumentStore.swift */,
+				68E2C8682632288C0000E2EF /* EmojiArtDocument.swift */,
+				68E9CACD263231BA00F32778 /* EmojiArt.swift */,
 				68F280592634E17F0066A332 /* AnimatableSystemFontModifier.swift */,
 				68E2C858263228100000E2EF /* EmojiArtApp.swift */,
 				68E2C85A263228100000E2EF /* EmojiArtDocumentView.swift */,
 				68F2805F2636060B0066A332 /* PaletteChooser.swift */,
-				68E2C8682632288C0000E2EF /* EmojiArtDocument.swift */,
-				68BDF709263A0C1F00B9D630 /* EmojiArtDocumentStore.swift */,
 				68BDF70B263A11A000B9D630 /* EmojiArtDocumentChooser.swift */,
-				68E9CACD263231BA00F32778 /* EmojiArt.swift */,
 				68E2C85C263228130000E2EF /* Assets.xcassets */,
 				68E2C861263228130000E2EF /* Info.plist */,
 				68E2C85E263228130000E2EF /* Preview Content */,
