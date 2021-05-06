@@ -74,8 +74,8 @@ struct EmojiArtDocumentView: View {
                     return drop(providers: providers, at: location)
                 }
             }
-            
-            .navigationBarItems(trailing: Button(action: {
+
+            .navigationBarItems(leading: self.pickImage, trailing: Button(action: {
                 if UIPasteboard.general.url != nil {
                     confirmBackgroundPaste = true
                 } else {
@@ -93,6 +93,17 @@ struct EmojiArtDocumentView: View {
                 }, secondaryButton: .cancel())
             })
             .zIndex(-1)
+        }
+    }
+
+    @State private var showImagePicker = false
+
+    var pickImage: some View {
+        Image(systemName: "photo").imageScale(.large).foregroundColor(.accentColor).onTapGesture {
+            self.showImagePicker = true
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker()
         }
     }
 
