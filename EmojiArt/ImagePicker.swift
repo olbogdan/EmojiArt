@@ -11,10 +11,13 @@ import UIKit
 typealias PickedImageHandler = (UIImage?) -> Void
 struct ImagePicker: UIViewControllerRepresentable {
     var handlePickedImage: PickedImageHandler
+    var sourceType: UIImagePickerController.SourceType = .camera
 
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            picker.sourceType = sourceType
+        }
         picker.delegate = context.coordinator
         return picker
     }
