@@ -8,7 +8,10 @@
 import SwiftUI
 import UIKit
 
+typealias PickedImageHandler = (UIImage?) -> Void
 struct ImagePicker: UIViewControllerRepresentable {
+    var handlePickedImage: PickedImageHandler
+
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -19,12 +22,23 @@ struct ImagePicker: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(handlePickedImage: handlePickedImage)
     }
 
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {}
+        var handlePickedImage: PickedImageHandler
 
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {}
+        init(handlePickedImage: @escaping PickedImageHandler) {
+            self.handlePickedImage = handlePickedImage
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            let image = info[.originalImage] as? UIImage
+            handlePickedImage(image)
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            handlePickedImage(nil)
+        }
     }
 }

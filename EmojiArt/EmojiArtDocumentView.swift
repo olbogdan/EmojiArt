@@ -103,7 +103,14 @@ struct EmojiArtDocumentView: View {
             self.showImagePicker = true
         }
         .sheet(isPresented: $showImagePicker) {
-            ImagePicker()
+            ImagePicker { image in
+                if let safeImage = image {
+                    DispatchQueue.main.async {
+                        self.document.backgroundURL = safeImage.storeInFilesystem()
+                    }
+                }
+                self.showImagePicker = false
+            }
         }
     }
 
