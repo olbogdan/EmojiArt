@@ -1,11 +1,18 @@
 # EmojiArt
 
-Application allows to customize an image.
-Features:
-Prestes of custimizable emojies.
-Drag and drop or paste any background.
-Manage multiple documents, create/rename/delete.
-Phones and tablets support.
+Crate a beutiful images customized by imojies.
+
+# Features:
+- Prestes of custimizable emojies.
+- Manage multiple documents, create/rename/delete.
+- Phones and tablets support.
+
+Add a beckground image by:
+- Drag and drop an image from anoter application on tablets.
+- Paste any image url background.
+- Add image from a photo library.
+- Add image from a camera.
+
 
 <img src="https://user-images.githubusercontent.com/7153849/116812904-206e6480-ab49-11eb-97da-d114d8dbc1b9.png" height="350" width="550">
 
